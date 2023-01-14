@@ -1,21 +1,13 @@
-import { useCallback } from "react"
+import React from "react"
+import { ForwardRefRenderFunction } from "react"
 
-type InputTextProps = {
-  onChange: (value: string) => void
-  value: any
+export type InputTextProps = React.ComponentPropsWithRef<"input">
+
+const InputText: ForwardRefRenderFunction<HTMLInputElement, InputTextProps> = (
+  { ...props },
+  ref,
+) => {
+  return <input type="text" {...props} ref={ref} />
 }
 
-export default function InputText(props: InputTextProps) {
-  const handleOnChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      props.onChange(e.target.value)
-    },
-    [props],
-  )
-
-  return (
-    <>
-      <input type="text" value={props.value} onChange={handleOnChange} />
-    </>
-  )
-}
+export default React.forwardRef<HTMLInputElement, InputTextProps>(InputText)
