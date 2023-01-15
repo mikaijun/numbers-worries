@@ -1,8 +1,8 @@
 export interface Worry {
-  id: number
-  worriesContent: string
-  minimumWorries: string
-  maximumWorries: string
-  realEventContent: string
+  id?: number
+  worries_content: string
+  minimum_worries: string
+  maximum_worries: string
+  real_event_content: string
   ratio: number
 }

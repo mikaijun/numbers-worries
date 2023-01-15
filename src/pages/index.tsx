@@ -1,28 +1,24 @@
 import React from "react"
-import { useCallback } from "react"
 import type { NextPage } from "next"
 import Link from "next/link"
-import { useRecoilState } from "recoil"
-import { sessionStorageState } from "../states/session-storage"
+import { useSessionStorage } from "@/hooks/useSessionStorage"
 
 const Page: NextPage = () => {
-  const [localValue, setLocalValue] = useRecoilState(sessionStorageState)
-  const handleOnChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setLocalValue(e.target.value)
-    },
-    [setLocalValue],
-  )
+  const { worries } = useSessionStorage()
 
   return (
     <div>
-      <div>
-        <span>LocalStorage Input</span>
-        <div>
-          <input type="text" value={localValue} onChange={handleOnChange} />
+      {worries.map((worry, index) => (
+        <div key={index}>
+          <Link href={`/${worry.id}`}>
+            トップへ
+            <span>心配事:</span>
+            <span>{worry.worries_content}</span>
+            <span>心配事割合:</span>
+            <span>{worry.ratio}</span>
+          </Link>
         </div>
-        <br />
-      </div>
+      ))}
     </div>
   )
 }
