@@ -1,8 +1,10 @@
-import { useFindWorry } from "@/hooks/useFindWorry"
+import { NextPage } from "next"
 import Link from "next/link"
 import { useRouter } from "next/router"
 
-export default function Detail() {
+import { useFindWorry } from "@/hooks/useFindWorry"
+
+const Detail: NextPage = () => {
   const router = useRouter()
   const { worry } = useFindWorry(Number(router.query.id))
   return (
@@ -28,3 +30,5 @@ export default function Detail() {
     </div>
   )
 }
+
+export default Detail

@@ -1,5 +1,4 @@
-import React from "react"
-import { ForwardRefRenderFunction } from "react"
+import React, { ForwardRefRenderFunction } from "react"
 
 export type InputTextProps = React.ComponentPropsWithRef<"input">
 

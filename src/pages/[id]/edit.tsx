@@ -1,8 +1,10 @@
-import WorryInput from "@/components/organisms/worryInput"
+import { NextPage } from "next"
 import Link from "next/link"
 import { useRouter } from "next/router"
 
-export default function Edit() {
+import WorryInput from "@/components/organisms/worryInput"
+
+const Edit: NextPage = () => {
   const router = useRouter()
   return (
     <div>
@@ -13,3 +15,5 @@ export default function Edit() {
     </div>
   )
 }
+
+export default Edit
