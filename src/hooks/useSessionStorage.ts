@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react"
 import { atom, useRecoilState } from "recoil"
 
+// TODO: バックエンド未実装のため、代用でsessionStorageに保存している
 export const useSessionStorage = (current: any) => {
   const sessionStorageEffect =
     (key: string) =>
@@ -24,18 +25,19 @@ export const useSessionStorage = (current: any) => {
     effects: [sessionStorageEffect("[]")],
   })
 
-  const [values, setValues] = useRecoilState(sessionStorageState)
-  const [parse, setParse] = useState([])
+  const [jsonValues, setJsonValues] = useRecoilState(sessionStorageState)
+  const [worries, setWorries] = useState([])
 
-  const handleSave = useCallback(() => {
-    setValues(JSON.stringify([...parse, current]))
-  }, [setValues, parse, current])
+  const handleCreateWorry = useCallback(() => {
+    setJsonValues(JSON.stringify([...worries, current]))
+  }, [setJsonValues, worries, current])
 
   useEffect(() => {
-    setParse(JSON.parse(values))
-  }, [setParse, values])
+    setWorries(JSON.parse(jsonValues))
+  }, [setWorries, jsonValues])
+
   return {
-    parse,
-    handleSave,
+    worries,
+    handleCreateWorry,
   }
 }

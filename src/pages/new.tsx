@@ -1,7 +1,5 @@
 import { useCallback, useEffect, useState } from "react"
 import Link from "next/link"
-import { useRecoilState } from "recoil"
-// import { sessionStorageState } from "../states/session-storage"
 import InputTextField from "@/components/molecules/InputTextField"
 import { useSessionStorage } from "../hooks/useSessionStorage"
 
@@ -13,8 +11,8 @@ export default function New() {
     real_event_content: "",
     ratio: "",
   })
-  const { parse, handleSave } = useSessionStorage(values)
-  console.log(parse)
+  const { handleCreateWorry } = useSessionStorage(values)
+
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const target = e.target
@@ -71,7 +69,7 @@ export default function New() {
           />
         </div>
         <br />
-        <button onClick={handleSave}>送信</button>
+        <button onClick={handleCreateWorry}>送信</button>
       </div>
     </div>
   )
