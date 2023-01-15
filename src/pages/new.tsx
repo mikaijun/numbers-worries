@@ -13,11 +13,8 @@ export default function New() {
     real_event_content: "",
     ratio: "",
   })
-  const [parse, handleSave] = useSessionStorage(values)
+  const { parse, handleSave } = useSessionStorage(values)
   console.log(parse)
-  // const [localValue, setLocalValue] = useRecoilState(sessionStorageState)
-  // const default2 = JSON.parse(localValue)
-  // console.log(default2)
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const target = e.target
@@ -25,11 +22,6 @@ export default function New() {
     },
     [values],
   )
-
-  // const handleSave = useCallback(() => {
-  //   const result = [...default2, values]
-  //   setLocalValue(JSON.stringify(result))
-  // }, [setLocalValue, values, default2])
 
   return (
     <div>

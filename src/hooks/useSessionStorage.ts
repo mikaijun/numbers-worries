@@ -34,5 +34,8 @@ export const useSessionStorage = (current: any) => {
   useEffect(() => {
     setParse(JSON.parse(values))
   }, [setParse, values])
-  return [parse, handleSave]
+  return {
+    parse,
+    handleSave,
+  }
 }
