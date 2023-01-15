@@ -1,8 +1,7 @@
-import { useCallback } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { atom, useRecoilState } from "recoil"
 
-export default function New() {
-  // TODO: バックエンド実装ができるまでの仮のデータ
+export const useSessionStorage = (current: any) => {
   const sessionStorageEffect =
     (key: string) =>
     ({ setSelf, onSet }: any) => {
@@ -25,6 +24,15 @@ export default function New() {
     effects: [sessionStorageEffect("[]")],
   })
 
-  const [localValue, setLocalValue] = useRecoilState(sessionStorageState)
-  const default2 = JSON.parse(localValue)
+  const [values, setValues] = useRecoilState(sessionStorageState)
+  const [parse, setParse] = useState([])
+
+  const handleSave = useCallback(() => {
+    setValues(JSON.stringify([...parse, current]))
+  }, [setValues, parse, current])
+
+  useEffect(() => {
+    setParse(JSON.parse(values))
+  }, [setParse, values])
+  return [parse, handleSave]
 }
