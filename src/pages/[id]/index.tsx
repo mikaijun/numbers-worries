@@ -2,7 +2,7 @@ import { NextPage } from "next"
 import Link from "next/link"
 import { useRouter } from "next/router"
 
-import { useFindWorry } from "@/hooks/useFindWorry"
+import { useFindWorry } from "@/src/hooks/useFindWorry"
 
 const Detail: NextPage = () => {
   const router = useRouter()

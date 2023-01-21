@@ -1,11 +1,9 @@
-import React from "react"
+import { gql, useQuery } from "@apollo/client"
 import Link from "next/link"
 
-import { useSessionStorage } from "@/hooks/useSessionStorage"
+import { useSessionStorage } from "@/src/hooks/useSessionStorage"
 
 import type { NextPage } from "next"
-
-import { gql, useQuery } from "@apollo/client"
 
 const GET_USERS = gql`
   query GetUsers {

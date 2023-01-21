@@ -1,8 +1,10 @@
-import { ApolloServer, gql } from "apollo-server-micro"
-import type { NextApiRequest, NextApiResponse } from "next"
+import { Context } from "react"
 
 import { PrismaClient } from "@prisma/client"
-import { Context } from "react"
+import { ApolloServer, gql } from "apollo-server-micro"
+
+import type { NextApiRequest, NextApiResponse } from "next"
+
 
 const prisma = new PrismaClient()
 

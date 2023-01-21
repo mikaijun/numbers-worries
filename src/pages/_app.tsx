@@ -1,7 +1,8 @@
-import type { AppProps } from "next/app"
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client"
 import { RecoilRoot } from "recoil"
 
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client"
+import type { AppProps } from "next/app"
+
 
 const client = new ApolloClient({
   uri: "/api/graphql",
