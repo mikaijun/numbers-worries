@@ -1,6 +1,6 @@
 import { NextPage } from "next"
 
-import WorryInput from "@/components/organisms/worryInput"
+import WorryInput from "../components/organisms/WorryInput"
 
 const New: NextPage = () => {
   return <WorryInput />
