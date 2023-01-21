@@ -1,6 +1,11 @@
 import { ApolloServer, gql } from 'apollo-server-micro';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+import { PrismaClient } from '@prisma/client';
+import { Context } from 'react';
+
+const prisma = new PrismaClient();
+
 const typeDefs = gql`
   type User {
     id: ID!
@@ -22,13 +27,18 @@ const users = [
 const resolvers = {
   Query: {
     hello: () => 'Hello World',
-    users: () => users,
+    users: async (parent: undefined, args: {}, context: any) => {
+      return await context.prisma.user.findMany();
+    },
   },
 };
 
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
+  context: {
+    prisma,
+  },
 });
 
 const startServer = apolloServer.start();
