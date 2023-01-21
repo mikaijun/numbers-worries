@@ -1,23 +1,24 @@
-import { Context } from "react"
-
 import { PrismaClient } from "@prisma/client"
 import { ApolloServer, gql } from "apollo-server-micro"
 
 import type { NextApiRequest, NextApiResponse } from "next"
 
-
 const prisma = new PrismaClient()
 
 const typeDefs = gql`
-  type User {
-    id: ID!
-    name: String!
-    email: String!
+  type Worry {
+    content: String
+    suppose_minimum_events: String
+    suppose_maximum_events: String
+    reality_events: String
+    damage_rate: String
+    created_at: String
+    update_at: String
   }
 
   type Query {
     hello: String
-    users: [User]
+    worries: [Worry]
   }
 `
 
@@ -29,8 +30,8 @@ const users = [
 const resolvers = {
   Query: {
     hello: () => "Hello World",
-    users: async (parent: undefined, args: {}, context: any) => {
-      return await context.prisma.user.findMany()
+    worries: async (parent: undefined, args: {}, context: any) => {
+      return await context.prisma.worry.findMany()
     },
   },
 }

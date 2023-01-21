@@ -13,8 +13,13 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
-model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  name    String?
+model Worry {
+  id                     Int    @id @default(autoincrement())
+  content                String @db.VarChar(255)
+  suppose_minimum_events String @db.VarChar(255)
+  suppose_maximum_events String @db.VarChar(255)
+  reality_events         String @db.VarChar(255)
+  damage_rate            Int
+  created_at             DateTime
+  update_at              DateTime
 }
