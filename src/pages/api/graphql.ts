@@ -22,15 +22,11 @@ const typeDefs = gql`
   }
 `
 
-const users = [
-  { id: "1", name: "John Doe", email: "john@test.com" },
-  { id: "2", name: "Jane Doe", email: "jane@example.com" },
-]
-
 const resolvers = {
   Query: {
     hello: () => "Hello World",
     worries: async (parent: undefined, args: {}, context: any) => {
+      console.log(context.prisma.worry)
       return await context.prisma.worry.findMany()
     },
   },
