@@ -1,10 +1,10 @@
-import { ApolloServer, gql } from 'apollo-server-micro';
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { ApolloServer, gql } from "apollo-server-micro"
+import type { NextApiRequest, NextApiResponse } from "next"
 
-import { PrismaClient } from '@prisma/client';
-import { Context } from 'react';
+import { PrismaClient } from "@prisma/client"
+import { Context } from "react"
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 
 const typeDefs = gql`
   type User {
@@ -17,21 +17,21 @@ const typeDefs = gql`
     hello: String
     users: [User]
   }
-`;
+`
 
 const users = [
-  { id: '1', name: 'John Doe', email: 'john@test.com' },
-  { id: '2', name: 'Jane Doe', email: 'jane@example.com' },
-];
+  { id: "1", name: "John Doe", email: "john@test.com" },
+  { id: "2", name: "Jane Doe", email: "jane@example.com" },
+]
 
 const resolvers = {
   Query: {
-    hello: () => 'Hello World',
+    hello: () => "Hello World",
     users: async (parent: undefined, args: {}, context: any) => {
-      return await context.prisma.user.findMany();
+      return await context.prisma.user.findMany()
     },
   },
-};
+}
 
 const apolloServer = new ApolloServer({
   typeDefs,
@@ -39,36 +39,36 @@ const apolloServer = new ApolloServer({
   context: {
     prisma,
   },
-});
+})
 
-const startServer = apolloServer.start();
+const startServer = apolloServer.start()
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader("Access-Control-Allow-Credentials", "true")
   res.setHeader(
-    'Access-Control-Allow-Origin',
-    'https://studio.apollographql.com'
-  );
+    "Access-Control-Allow-Origin",
+    "https://studio.apollographql.com",
+  )
   res.setHeader(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  );
-  if (req.method === 'OPTIONS') {
-    res.end();
-    return false;
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept",
+  )
+  if (req.method === "OPTIONS") {
+    res.end()
+    return false
   }
 
-  await startServer;
+  await startServer
   await apolloServer.createHandler({
-    path: '/api/graphql',
-  })(req, res);
+    path: "/api/graphql",
+  })(req, res)
 }
 
 export const config = {
   api: {
     bodyParser: false,
   },
-};
+}

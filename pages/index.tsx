@@ -5,25 +5,25 @@ import { useSessionStorage } from "@/hooks/useSessionStorage"
 
 import type { NextPage } from "next"
 
-import { gql, useQuery } from '@apollo/client';
+import { gql, useQuery } from "@apollo/client"
 
 const GET_USERS = gql`
-query GetUsers {
-  users {
-    id
-    name
-    email
+  query GetUsers {
+    users {
+      id
+      name
+      email
+    }
   }
-}
-`;
+`
 
 const Page: NextPage = () => {
   const { worries } = useSessionStorage()
-  const { data, loading, error } = useQuery(GET_USERS);
-  if (loading) return <p>ローディング中です</p>;
-  if (error) return <p>エラーが発生しています</p>;
+  const { data, loading, error } = useQuery(GET_USERS)
+  if (loading) return <p>ローディング中です</p>
+  if (error) return <p>エラーが発生しています</p>
 
-  const { users } = data;
+  const { users } = data
 
   return (
     <div>

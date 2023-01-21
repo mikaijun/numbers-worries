@@ -8,6 +8,8 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  // HACK: 設定した当時、ローカルでmigrateするとtime outするため、ベースのDBを変える必要があったため定義している
+  // https://github.com/prisma/prisma/issues/16853#issuecomment-1398787290
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
