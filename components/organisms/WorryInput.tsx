@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useState } from "react"
 
-import InputTextField from "@/src/components/molecules/InputTextField"
-import { useFindWorry } from "@/src/hooks/useFindWorry"
-import { useSessionStorage } from "@/src/hooks/useSessionStorage"
-import { Worry } from "@/type"
+import InputTextField from "components/molecules/InputTextField"
+
+import { useFindWorry } from "../../hooks/useFindWorry"
+import { useSessionStorage } from "../../hooks/useSessionStorage"
+import { Worry } from "../../type"
 
 export type WorryInputProps = {
   id?: number

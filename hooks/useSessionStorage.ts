@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react"
 
 import { atom, useRecoilState } from "recoil"
 
-import { Worry } from "@/type"
+import { Worry } from "../type"
 
 // TODO: バックエンド未実装のため、代用でsessionStorageに保存している
 export const useSessionStorage = (targetWorry?: Worry) => {
