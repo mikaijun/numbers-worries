@@ -7,7 +7,7 @@ import InputTextField from "components/molecules/InputTextField"
 import { Worry } from "../../type"
 
 export type WorryInputProps = {
-  id: string | string[] | undefined
+  id?: string | string[]
 }
 
 const GET_WORRY = gql`
