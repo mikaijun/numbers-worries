@@ -1,16 +1,30 @@
 import { useCallback, useEffect, useState } from "react"
 
+import { gql, useMutation } from "@apollo/client"
+
 import InputTextField from "components/molecules/InputTextField"
 
 import { useFindWorry } from "../../hooks/useFindWorry"
-import { useSessionStorage } from "../../hooks/useSessionStorage"
 import { Worry } from "../../type"
 
 export type WorryInputProps = {
   id?: number
 }
-
+export const saveWorryMutation = gql`
+  mutation saveWorry($data: SaveWorryInput!) {
+    saveWorry(data: $data) {
+      content
+      suppose_minimum_events
+      suppose_maximum_events
+      reality_events
+      damage_rate
+      created_at
+      update_at
+    }
+  }
+`
 const WorryInput: React.FC<WorryInputProps> = ({ id }) => {
+  const [save] = useMutation(saveWorryMutation)
   const { worry } = useFindWorry(Number(id))
   const [values, setValues] = useState<Worry>({
     id: undefined,
@@ -32,7 +46,19 @@ const WorryInput: React.FC<WorryInputProps> = ({ id }) => {
     })
   }, [worry, setValues])
 
-  const { handleCreateWorry } = useSessionStorage(values)
+  const handleCreateWorry = useCallback(async () => {
+    const data = {
+      id: null,
+      content: values.worries_content,
+      suppose_minimum_events: values.minimum_worries,
+      suppose_maximum_events: values.maximum_worries,
+      reality_events: values.real_event_content,
+      damage_rate: values.ratio,
+    }
+    await save({
+      variables: { data },
+    })
+  }, [save, values])
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
