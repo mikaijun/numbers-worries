@@ -53,7 +53,7 @@ const WorryInput: React.FC<WorryInputProps> = ({ id }) => {
       suppose_minimum_events: values.minimum_worries,
       suppose_maximum_events: values.maximum_worries,
       reality_events: values.real_event_content,
-      damage_rate: values.ratio,
+      damage_rate: Number(values.ratio),
     }
     await save({
       variables: { data },
