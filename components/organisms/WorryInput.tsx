@@ -1,15 +1,27 @@
 import { useCallback, useEffect, useState } from "react"
 
-import { gql, useMutation } from "@apollo/client"
+import { gql, useMutation, useQuery } from "@apollo/client"
 
 import InputTextField from "components/molecules/InputTextField"
 
-import { useFindWorry } from "../../hooks/useFindWorry"
 import { Worry } from "../../type"
 
 export type WorryInputProps = {
-  id?: number
+  id: string | string[] | undefined
 }
+
+const GET_WORRY = gql`
+  query GetUsers($id: ID!) {
+    worry(id: $id) {
+      id
+      content
+      suppose_minimum_events
+      suppose_maximum_events
+      reality_events
+      damage_rate
+    }
+  }
+`
 export const saveWorryMutation = gql`
   mutation saveWorry($data: SaveWorryInput!) {
     saveWorry(data: $data) {
@@ -25,7 +37,11 @@ export const saveWorryMutation = gql`
 `
 const WorryInput: React.FC<WorryInputProps> = ({ id }) => {
   const [save] = useMutation(saveWorryMutation)
-  const { worry } = useFindWorry(Number(id))
+  const { data, loading, error } = useQuery(GET_WORRY, {
+    variables: {
+      id: Number(id),
+    },
+  })
   const [values, setValues] = useState<Worry>({
     id: undefined,
     worries_content: "",
@@ -36,19 +52,20 @@ const WorryInput: React.FC<WorryInputProps> = ({ id }) => {
   })
 
   useEffect(() => {
+    if (!data) return
     setValues({
-      id: worry ? worry.id : undefined,
-      worries_content: worry ? worry.worries_content : "",
-      minimum_worries: worry ? worry.minimum_worries : "",
-      maximum_worries: worry ? worry.maximum_worries : "",
-      real_event_content: worry ? worry.real_event_content : "",
-      ratio: worry ? worry.ratio : 0,
+      id: data.worry ? data.worry.id : undefined,
+      worries_content: data.worry ? data.worry.content : "",
+      minimum_worries: data.worry ? data.worry.suppose_minimum_events : "",
+      maximum_worries: data.worry ? data.worry.suppose_maximum_events : "",
+      real_event_content: data.worry ? data.worry.reality_events : "",
+      ratio: data.worry ? data.worry.damage_rate : 0,
     })
-  }, [worry, setValues])
+  }, [data, setValues])
 
   const handleCreateWorry = useCallback(async () => {
     const data = {
-      id: null,
+      id: id,
       content: values.worries_content,
       suppose_minimum_events: values.minimum_worries,
       suppose_maximum_events: values.maximum_worries,
@@ -67,7 +84,8 @@ const WorryInput: React.FC<WorryInputProps> = ({ id }) => {
     },
     [values],
   )
-
+  if (loading) return <p>ローディング中です</p>
+  if (error) return <p>エラーが発生しています</p>
   return (
     <div>
       <div>

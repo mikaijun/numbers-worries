@@ -7,13 +7,14 @@ const prisma = new PrismaClient()
 
 const typeDefs = gql`
   type Worry {
-    content: String
-    suppose_minimum_events: String
-    suppose_maximum_events: String
-    reality_events: String
-    damage_rate: String
-    created_at: String
-    update_at: String
+    id: ID
+    content: String!
+    suppose_minimum_events: String!
+    suppose_maximum_events: String!
+    reality_events: String!
+    damage_rate: String!
+    created_at: String!
+    update_at: String!
   }
 
   input SaveWorryInput {
@@ -27,6 +28,7 @@ const typeDefs = gql`
 
   type Query {
     hello: String
+    worry(id: ID): Worry
     worries: [Worry]
   }
 
@@ -48,24 +50,47 @@ type SaveWorryInputType = {
 const resolvers = {
   Query: {
     hello: () => "Hello World",
+    worry: async (_: any, args: any) => {
+      console.log(args)
+      return await prisma.worry.findUnique({
+        where: { id: Number(args.id) },
+      })
+    },
     worries: async () => {
       return await prisma.worry.findMany()
     },
   },
   Mutation: {
     saveWorry: (_: any, args: SaveWorryInputType) => {
-      console.log("確認です", args)
-      return prisma.worry.create({
-        data: {
-          content: args.data.content,
-          suppose_minimum_events: args.data.suppose_minimum_events,
-          suppose_maximum_events: args.data.suppose_maximum_events,
-          reality_events: args.data.reality_events,
-          damage_rate: args.data.damage_rate,
-          created_at: new Date(),
-          update_at: new Date(),
-        },
-      })
+      if (args.data.id) {
+        return prisma.worry.update({
+          where: {
+            id: Number(args.data.id),
+          },
+          data: {
+            content: args.data.content,
+            suppose_minimum_events: args.data.suppose_minimum_events,
+            suppose_maximum_events: args.data.suppose_maximum_events,
+            reality_events: args.data.reality_events,
+            damage_rate: args.data.damage_rate,
+            // TODO: 後で直す
+            created_at: new Date(),
+            update_at: new Date(),
+          },
+        })
+      } else {
+        return prisma.worry.create({
+          data: {
+            content: args.data.content,
+            suppose_minimum_events: args.data.suppose_minimum_events,
+            suppose_maximum_events: args.data.suppose_maximum_events,
+            reality_events: args.data.reality_events,
+            damage_rate: args.data.damage_rate,
+            created_at: new Date(),
+            update_at: new Date(),
+          },
+        })
+      }
     },
   },
 }

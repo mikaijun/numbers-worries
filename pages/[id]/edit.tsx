@@ -9,7 +9,7 @@ const Edit: NextPage = () => {
   return (
     <div>
       <p>{router.query.id}</p>
-      <WorryInput id={Number(router.query.id)} />
+      <WorryInput id={router.query.id} />
       <Link href="/">トップへ</Link>
       <Link href={`/${router.query.id}/`}>詳細へ</Link>
     </div>
