@@ -11,7 +11,7 @@ export type WorryInputProps = {
 }
 
 const GET_WORRY = gql`
-  query GetUsers($id: ID!) {
+  query GetWorries($id: ID!) {
     worry(id: $id) {
       id
       content
@@ -52,14 +52,14 @@ const WorryInput: React.FC<WorryInputProps> = ({ id }) => {
   })
 
   useEffect(() => {
-    if (!data) return
+    if (!data.worry) return
     setValues({
-      id: data.worry ? data.worry.id : undefined,
-      worries_content: data.worry ? data.worry.content : "",
-      minimum_worries: data.worry ? data.worry.suppose_minimum_events : "",
-      maximum_worries: data.worry ? data.worry.suppose_maximum_events : "",
-      real_event_content: data.worry ? data.worry.reality_events : "",
-      ratio: data.worry ? data.worry.damage_rate : 0,
+      id: undefined,
+      worries_content: data.worry.content,
+      minimum_worries: data.worry.suppose_minimum_events,
+      maximum_worries: data.worry.suppose_maximum_events,
+      real_event_content: data.worry.reality_events,
+      ratio: data.worry.damage_rate,
     })
   }, [data, setValues])
 

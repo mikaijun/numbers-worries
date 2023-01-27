@@ -4,7 +4,7 @@ import Link from "next/link"
 import type { NextPage } from "next"
 
 const GET_WORRIES = gql`
-  query GetUsers {
+  query GetWorries {
     worries {
       id
       content
