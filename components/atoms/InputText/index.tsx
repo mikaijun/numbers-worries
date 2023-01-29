@@ -8,7 +8,7 @@ import { colors } from "../../../constants/colors"
 const Input = styled.input`
   margin: 0;
   outline: 0;
-  padding: 0.4rem;
+  padding: 4px;
   line-height: 1;
   border-radius: 8px;
   color: ${colors.black};

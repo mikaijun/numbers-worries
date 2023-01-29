@@ -13,7 +13,7 @@ const Wrapper = styled.label`
 `
 
 const Text = styled.div`
-  font-size: 0.75rem;
+  font-size: 12px;
 `
 
 const TextWrapper = styled.div`

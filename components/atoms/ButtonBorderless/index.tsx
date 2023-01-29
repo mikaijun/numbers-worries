@@ -7,8 +7,8 @@ import { colors } from "../../../constants/colors"
 
 const Button = styled.button<{ $isDisabled: boolean; $styles: Styles }>`
   display: inline-block;
-  padding: 0.5rem;
-  font-size: 0.875rem;
+  padding: 8px;
+  font-size: 14px;
   border: none;
   border-radius: 8px;
   transition: background-color 0.25s ease;
