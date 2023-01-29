@@ -113,7 +113,6 @@ export default async function handler(
   const isAllowed =
     (origin && origin.includes("http://localhost")) ||
     origin === "https://studio.apollographql.com"
-
   if (isAllowed) {
     res.setHeader("Access-Control-Allow-Origin", origin)
   }

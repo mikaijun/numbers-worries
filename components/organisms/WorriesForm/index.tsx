@@ -4,7 +4,14 @@ import { gql, useMutation, useQuery } from "@apollo/client"
 import styled from "@emotion/styled"
 
 import { Worry } from "../../../type"
+import ButtonBorderless from "../../atoms/ButtonBorderless"
 import InputTextField from "../../molecules/InputTextField"
+
+const Wrapper = styled.div`
+  display: inline-flex;
+  gap: 8px;
+  flex-direction: column;
+`
 
 export type WorryInputProps = {
   id?: string | string[]
@@ -39,7 +46,7 @@ const WorriesForm: React.FC<WorryInputProps> = ({ id }) => {
   const [save] = useMutation(saveWorryMutation)
   const { data, loading, error } = useQuery(GET_WORRY, {
     variables: {
-      id: Number(3),
+      id: Number(id),
     },
   })
   const [values, setValues] = useState<Worry>({
@@ -84,47 +91,42 @@ const WorriesForm: React.FC<WorryInputProps> = ({ id }) => {
     },
     [values],
   )
-  if (loading) return <p>ローディング中です</p>
-  if (error) return <p>エラーが発生しています</p>
-  const Form = styled.form`
-    width: 100%;
-    max-width: 36.25rem;
-  `
+
   return (
-    <Form>
-      <span>心配内容</span>
+    <Wrapper>
       <InputTextField
         name="worries_content"
+        label="悩んでいること"
         value={values.worries_content}
         onChange={handleInputChange}
       />
-      <span>心配事に対する想定する最小の出来事</span>
       <InputTextField
         name="minimum_worries"
+        label="想定最小被害"
         value={values.minimum_worries}
         onChange={handleInputChange}
       />
-      <span>心配事に対する想定する最大の出来事</span>
       <InputTextField
         name="maximum_worries"
+        label="想定最大被害"
         value={values.maximum_worries}
         onChange={handleInputChange}
       />
-      <span>実際に発生した出来事</span>
       <InputTextField
         name="real_event_content"
+        label="現実に発生した出来事"
         value={values.real_event_content}
         onChange={handleInputChange}
       />
-      <span>実際の出来事は想定した最大の何割だったか？</span>
       <InputTextField
         name="ratio"
+        label="現実に発生した出来事は想定最大被害の何割か？"
         value={values.ratio}
         onChange={handleInputChange}
       />
       <br />
-      <button onClick={handleCreateWorry}>送信</button>
-    </Form>
+      <ButtonBorderless onClick={handleCreateWorry}>送信</ButtonBorderless>
+    </Wrapper>
   )
 }
 

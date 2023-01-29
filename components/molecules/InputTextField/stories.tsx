@@ -13,5 +13,6 @@ export default {
 export const Primary: ComponentStoryObj<typeof InputTextField> = {
   args: {
     disabled: false,
+    label: "InputLabel",
   },
 }

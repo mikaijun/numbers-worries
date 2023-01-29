@@ -16,9 +16,3 @@ export const Primary: ComponentStoryObj<typeof ButtonBorderless> = {
     children: "ButtonBorderless",
   },
 }
-export const Disabled: ComponentStoryObj<typeof ButtonBorderless> = {
-  args: {
-    disabled: true,
-    children: "ButtonBorderless",
-  },
-}

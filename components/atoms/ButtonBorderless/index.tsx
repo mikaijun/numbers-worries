@@ -54,7 +54,7 @@ const stylesFactory = (variant: string): Styles => {
 const ButtonBorderless: ForwardRefRenderFunction<
   HTMLInputElement,
   ButtonBorderlessProps
-> = ({ disabled = false, variant = "primary", ...props }) => {
+> = ({ disabled = false, variant = "primary", onPress, ...props }) => {
   const styles = stylesFactory(variant)
   return (
     <Button {...props} $isDisabled={disabled} $styles={styles}>
