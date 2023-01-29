@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from "react"
 
 import { gql, useMutation, useQuery } from "@apollo/client"
+import styled from "@emotion/styled"
 
-import InputTextField from "components/molecules/InputTextField"
-
-import { Worry } from "../../type"
+import { Worry } from "../../../type"
+import InputTextField from "../../molecules/InputTextField"
 
 export type WorryInputProps = {
   id?: string | string[]
@@ -35,11 +35,11 @@ export const saveWorryMutation = gql`
     }
   }
 `
-const WorryInput: React.FC<WorryInputProps> = ({ id }) => {
+const WorriesForm: React.FC<WorryInputProps> = ({ id }) => {
   const [save] = useMutation(saveWorryMutation)
   const { data, loading, error } = useQuery(GET_WORRY, {
     variables: {
-      id: Number(id),
+      id: Number(3),
     },
   })
   const [values, setValues] = useState<Worry>({
@@ -52,7 +52,7 @@ const WorryInput: React.FC<WorryInputProps> = ({ id }) => {
   })
 
   useEffect(() => {
-    if (!data.worry) return
+    if (!data?.worry) return
     setValues({
       id: undefined,
       worries_content: data.worry.content,
@@ -86,58 +86,46 @@ const WorryInput: React.FC<WorryInputProps> = ({ id }) => {
   )
   if (loading) return <p>ローディング中です</p>
   if (error) return <p>エラーが発生しています</p>
+  const Form = styled.form`
+    width: 100%;
+    max-width: 36.25rem;
+  `
   return (
-    <div>
-      <div>
-        <span>心配内容</span>
-        <div>
-          <InputTextField
-            name="worries_content"
-            value={values.worries_content}
-            onChange={handleInputChange}
-          />
-        </div>
-        <br />
-        <span>心配事に対する想定する最小の出来事</span>
-        <div>
-          <InputTextField
-            name="minimum_worries"
-            value={values.minimum_worries}
-            onChange={handleInputChange}
-          />
-        </div>
-        <br />
-        <span>心配事に対する想定する最大の出来事</span>
-        <div>
-          <InputTextField
-            name="maximum_worries"
-            value={values.maximum_worries}
-            onChange={handleInputChange}
-          />
-        </div>
-        <br />
-        <span>実際に発生した出来事</span>
-        <div>
-          <InputTextField
-            name="real_event_content"
-            value={values.real_event_content}
-            onChange={handleInputChange}
-          />
-        </div>
-        <br />
-        <span>実際の出来事は想定した最大の何割だったか？</span>
-        <div>
-          <InputTextField
-            name="ratio"
-            value={values.ratio}
-            onChange={handleInputChange}
-          />
-        </div>
-        <br />
-        <button onClick={handleCreateWorry}>送信</button>
-      </div>
-    </div>
+    <Form>
+      <span>心配内容</span>
+      <InputTextField
+        name="worries_content"
+        value={values.worries_content}
+        onChange={handleInputChange}
+      />
+      <span>心配事に対する想定する最小の出来事</span>
+      <InputTextField
+        name="minimum_worries"
+        value={values.minimum_worries}
+        onChange={handleInputChange}
+      />
+      <span>心配事に対する想定する最大の出来事</span>
+      <InputTextField
+        name="maximum_worries"
+        value={values.maximum_worries}
+        onChange={handleInputChange}
+      />
+      <span>実際に発生した出来事</span>
+      <InputTextField
+        name="real_event_content"
+        value={values.real_event_content}
+        onChange={handleInputChange}
+      />
+      <span>実際の出来事は想定した最大の何割だったか？</span>
+      <InputTextField
+        name="ratio"
+        value={values.ratio}
+        onChange={handleInputChange}
+      />
+      <br />
+      <button onClick={handleCreateWorry}>送信</button>
+    </Form>
   )
 }
 
-export default WorryInput
+export default WorriesForm

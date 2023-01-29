@@ -2,7 +2,7 @@ import { NextPage } from "next"
 import Link from "next/link"
 import { useRouter } from "next/router"
 
-import WorryInput from "../../components/organisms/WorryInput"
+import WorryInput from "../../components/organisms/WorriesForm"
 
 const Edit: NextPage = () => {
   const router = useRouter()

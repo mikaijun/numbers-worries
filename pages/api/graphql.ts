@@ -51,7 +51,6 @@ const resolvers = {
   Query: {
     hello: () => "Hello World",
     worry: async (_: any, args: any) => {
-      console.log(args)
       return await prisma.worry.findUnique({
         where: { id: Number(args.id) },
       })
@@ -109,11 +108,16 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
+  const origin = req.headers.origin
+  // NOTE: ローカル環境とstudioの場合アクセスを許可する
+  const isAllowed =
+    (origin && origin.includes("http://localhost")) ||
+    origin === "https://studio.apollographql.com"
+
+  if (isAllowed) {
+    res.setHeader("Access-Control-Allow-Origin", origin)
+  }
   res.setHeader("Access-Control-Allow-Credentials", "true")
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://studio.apollographql.com",
-  )
   res.setHeader(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept",
