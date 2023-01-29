@@ -5,6 +5,7 @@ import styled from "@emotion/styled"
 
 import { Worry } from "../../../type"
 import ButtonBorderless from "../../atoms/ButtonBorderless"
+import BackLink from "../../molecules/BackLink"
 import InputTextField from "../../molecules/InputTextField"
 
 const Wrapper = styled.div`
@@ -94,6 +95,7 @@ const WorriesForm: React.FC<WorryInputProps> = ({ id }) => {
 
   return (
     <Wrapper>
+      <BackLink href={`/${id}`} />
       <InputTextField
         name="worries_content"
         label="悩んでいること"
