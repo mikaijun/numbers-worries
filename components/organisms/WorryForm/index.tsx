@@ -5,7 +5,7 @@ import { gql, useMutation, useQuery } from "@apollo/client"
 import styled from "@emotion/styled"
 
 import { Worry } from "../../../type"
-import ButtonBorderless from "../../atoms/ButtonBorderless"
+import Button from "../../atoms/Button"
 import Spacer from "../../atoms/Spacer"
 import InputTextField from "../../molecules/InputTextField"
 import LinkButtonBordered from "../../molecules/LinkButtonBordered"
@@ -26,7 +26,7 @@ const StyledLinkButtonBordered = styled(LinkButtonBordered)`
   max-width: 240px;
 `
 
-const StyledButtonBorderless = styled(ButtonBorderless)`
+const StyledButton = styled(Button)`
   width: 100%;
   max-width: 240px;
   margin: 0 auto;
@@ -149,10 +149,10 @@ const WorryForm: React.FC<WorryInputProps> = ({ id }) => {
         onChange={handleInputChange}
       />
       <Spacer height={16} />
-      <StyledButtonBorderless onClick={handleCreateWorry}>
-        悩みを管理する
-      </StyledButtonBorderless>
-      <StyledLinkButtonBordered href="/">戻る</StyledLinkButtonBordered>
+      <StyledButton onClick={handleCreateWorry}>悩みを管理する</StyledButton>
+      <StyledLinkButtonBordered href="/" variant="border">
+        戻る
+      </StyledLinkButtonBordered>
     </Wrapper>
   )
 }

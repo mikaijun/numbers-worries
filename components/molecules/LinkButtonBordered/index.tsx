@@ -3,11 +3,9 @@ import React from "react"
 import styled from "@emotion/styled"
 import Link from "next/link"
 
-import ButtonBorderless, {
-  ButtonBorderlessProps,
-} from "../../atoms/ButtonBorderless"
+import Button, { ButtonProps } from "../../atoms/Button"
 
-const StyledButtonBorderless = styled(ButtonBorderless)`
+const StyledButton = styled(Button)`
   padding: 0;
 `
 
@@ -19,7 +17,7 @@ const StyleLink = styled(Link)`
   padding: 8px;
 `
 
-export type LinkButtonBorderedProps = ButtonBorderlessProps & {
+export type LinkButtonBorderedProps = ButtonProps & {
   href: string
 }
 
@@ -29,9 +27,9 @@ const LinkButtonBordered = ({
   ...props
 }: LinkButtonBorderedProps) => {
   return (
-    <StyledButtonBorderless {...props}>
+    <StyledButton {...props}>
       <StyleLink href={href}>{children}</StyleLink>
-    </StyledButtonBorderless>
+    </StyledButton>
   )
 }
 

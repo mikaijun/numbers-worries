@@ -73,7 +73,7 @@ const WorryDetail: React.FC<WorryInputProps> = ({ id }) => {
       <StyledLinkButtonBordered href={`/${id}/edit`}>
         悩みを考え直す
       </StyledLinkButtonBordered>
-      <StyledLinkButtonBordered href="/">
+      <StyledLinkButtonBordered href="/" variant="border">
         悩み一覧へ戻る
       </StyledLinkButtonBordered>
     </Wrapper>
