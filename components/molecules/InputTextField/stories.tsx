@@ -14,5 +14,12 @@ export const Primary: ComponentStoryObj<typeof InputTextField> = {
   args: {
     disabled: false,
     label: "InputLabel",
+    name: "inputLabel",
+  },
+}
+
+export const NoLabel: ComponentStoryObj<typeof InputTextField> = {
+  args: {
+    disabled: false,
   },
 }

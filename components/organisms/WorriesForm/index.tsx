@@ -126,7 +126,6 @@ const WorriesForm: React.FC<WorryInputProps> = ({ id }) => {
         value={values.ratio}
         onChange={handleInputChange}
       />
-      <br />
       <ButtonBorderless onClick={handleCreateWorry}>送信</ButtonBorderless>
     </Wrapper>
   )

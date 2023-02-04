@@ -31,8 +31,17 @@ const InputTextField = ({
 
   return (
     <Wrapper>
-      {label && <InputLabel required={props.required}>{label}</InputLabel>}
-      <InputText {...props} type="text" onChange={handleChange} />
+      {label && (
+        <InputLabel required={props.required} htmlFor={props.name}>
+          {label}
+        </InputLabel>
+      )}
+      <InputText
+        {...props}
+        id={props.name}
+        type="text"
+        onChange={handleChange}
+      />
     </Wrapper>
   )
 }
