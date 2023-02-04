@@ -1,3 +1,4 @@
+import React from "react"
 import { useCallback, useEffect, useState } from "react"
 
 import { gql, useMutation, useQuery } from "@apollo/client"
@@ -6,8 +7,8 @@ import styled from "@emotion/styled"
 import { Worry } from "../../../type"
 import ButtonBorderless from "../../atoms/ButtonBorderless"
 import Spacer from "../../atoms/Spacer"
-import BackLink from "../../molecules/BackLink"
 import InputTextField from "../../molecules/InputTextField"
+import LinkButtonBordered from "../../molecules/LinkButtonBordered"
 
 const Wrapper = styled.div`
   width: 100%;
@@ -17,6 +18,12 @@ const Wrapper = styled.div`
   gap: 16px;
   flex-direction: column;
   padding: 16px;
+`
+
+const StyledLinkButtonBordered = styled(LinkButtonBordered)`
+  margin: 0 auto;
+  width: 100%;
+  max-width: 240px;
 `
 
 const StyledButtonBorderless = styled(ButtonBorderless)`
@@ -106,7 +113,6 @@ const WorryForm: React.FC<WorryInputProps> = ({ id }) => {
 
   return (
     <Wrapper>
-      <BackLink href={`/${id}`} />
       <InputTextField
         name="worries_content"
         label="悩んでいること"
@@ -146,6 +152,7 @@ const WorryForm: React.FC<WorryInputProps> = ({ id }) => {
       <StyledButtonBorderless onClick={handleCreateWorry}>
         悩みを管理する
       </StyledButtonBorderless>
+      <StyledLinkButtonBordered href="/">戻る</StyledLinkButtonBordered>
     </Wrapper>
   )
 }

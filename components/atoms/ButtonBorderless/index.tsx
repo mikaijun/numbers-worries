@@ -34,7 +34,7 @@ type Styles = {
   backgroundColor: string
   hoverBackgroundColor: string
 }
-type ButtonBorderlessProps = React.ComponentPropsWithRef<"button"> & {
+export type ButtonBorderlessProps = React.ComponentPropsWithRef<"button"> & {
   children: React.ReactNode
   variant?: ButtonBorderlessVariant
   disabled?: boolean
@@ -52,7 +52,7 @@ const stylesFactory = (variant: string): Styles => {
 }
 
 const ButtonBorderless: ForwardRefRenderFunction<
-  HTMLInputElement,
+  HTMLButtonElement,
   ButtonBorderlessProps
 > = ({ disabled = false, variant = "primary", onPress, ...props }) => {
   const styles = stylesFactory(variant)
@@ -63,6 +63,6 @@ const ButtonBorderless: ForwardRefRenderFunction<
   )
 }
 
-export default React.forwardRef<HTMLInputElement, ButtonBorderlessProps>(
+export default React.forwardRef<HTMLButtonElement, ButtonBorderlessProps>(
   ButtonBorderless,
 )
