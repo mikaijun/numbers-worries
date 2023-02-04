@@ -51,7 +51,7 @@ const stylesFactory = (variant: ButtonVariant): Styles => {
       return {
         color: colors.primary,
         backgroundColor: colors.white,
-        hoverBackgroundColor: colors.white,
+        hoverBackgroundColor: colors.whiteGreen,
         border: `1px solid ${colors.primary}`,
       }
   }

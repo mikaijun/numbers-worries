@@ -17,7 +17,7 @@ export default {
 const Template: ComponentStory<typeof WorryForm> = (args) => {
   return (
     <ApolloProvider client={storyBookClient}>
-      <WorryForm {...args} id={"3"} />
+      <WorryForm {...args} id={3} />
     </ApolloProvider>
   )
 }

@@ -122,28 +122,28 @@ const WorryForm: React.FC<WorryInputProps> = ({ id }) => {
       />
       <InputTextField
         name="minimum_worries"
-        label="想定最小被害"
+        label="予想される最小困難"
         placeholder="毎月手取りの10%以上の貯金ができる"
         value={values.minimum_worries}
         onChange={handleInputChange}
       />
       <InputTextField
         name="maximum_worries"
-        label="想定最大被害"
+        label="予想される最大困難"
         placeholder="自己破産してしまう"
         value={values.maximum_worries}
         onChange={handleInputChange}
       />
       <InputTextField
         name="real_event_content"
-        label="現実に発生した出来事"
+        label="実際の出来事"
         placeholder="毎月手取りの1%の貯金ができてる"
         value={values.real_event_content}
         onChange={handleInputChange}
       />
       <InputTextField
         name="ratio"
-        label="現実に発生した出来事は想定最大被害の何割か？"
+        label="困難フィードバック"
         placeholder="10"
         value={values.ratio}
         onChange={handleInputChange}
