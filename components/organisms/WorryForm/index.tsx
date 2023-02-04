@@ -54,7 +54,7 @@ export const saveWorryMutation = gql`
     }
   }
 `
-const WorriesForm: React.FC<WorryInputProps> = ({ id }) => {
+const WorryForm: React.FC<WorryInputProps> = ({ id }) => {
   const [save] = useMutation(saveWorryMutation)
   const { data, loading, error } = useQuery(GET_WORRY, {
     variables: {
@@ -150,4 +150,4 @@ const WorriesForm: React.FC<WorryInputProps> = ({ id }) => {
   )
 }
 
-export default WorriesForm
+export default WorryForm

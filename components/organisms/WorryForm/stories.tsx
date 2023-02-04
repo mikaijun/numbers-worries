@@ -2,22 +2,22 @@ import { ApolloProvider } from "@apollo/client"
 
 import { storyBookClient } from "../../../pages/_app"
 
-import WorriesForm from "./index"
+import WorryForm from "./index"
 
 import type { ComponentMeta, ComponentStory } from "@storybook/react"
 
 export default {
-  title: "Organisms/Worry/WorriesForm",
-  component: WorriesForm,
+  title: "Organisms/Worry/WorryForm",
+  component: WorryForm,
   argTypes: {
     onClose: { action: "onClose" },
   },
-} as ComponentMeta<typeof WorriesForm>
+} as ComponentMeta<typeof WorryForm>
 
-const Template: ComponentStory<typeof WorriesForm> = (args) => {
+const Template: ComponentStory<typeof WorryForm> = (args) => {
   return (
     <ApolloProvider client={storyBookClient}>
-      <WorriesForm {...args} id={"3"} />
+      <WorryForm {...args} id={"3"} />
     </ApolloProvider>
   )
 }

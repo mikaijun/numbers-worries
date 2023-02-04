@@ -2,13 +2,13 @@ import { NextPage } from "next"
 import { useRouter } from "next/router"
 
 import WorryLayout from "../../components/Layouts/WorryLayout"
-import WorryInput from "../../components/organisms/WorriesForm"
+import WorryForm from "../../components/organisms/WorryForm"
 
 const Edit: NextPage = () => {
   const router = useRouter()
   return (
     <WorryLayout>
-      <WorryInput id={router.query.id} />
+      <WorryForm id={router.query.id} />
     </WorryLayout>
   )
 }
