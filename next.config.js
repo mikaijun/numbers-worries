@@ -4,6 +4,7 @@ const nextConfig = {
   compiler: {
     emotion: true,
   },
+  reactStrictMode: true,
   webpack: (config, { webpack }) => {
     // Note: we provide webpack above so you should not `require` it
     // Perform customizations to webpack config
