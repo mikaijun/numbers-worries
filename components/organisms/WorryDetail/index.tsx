@@ -5,7 +5,7 @@ import { colors } from "../../../constants/colors"
 import LinkButtonBordered from "../../molecules/LinkButtonBordered"
 
 export type WorryInputProps = {
-  id?: string | string[]
+  id: number
 }
 
 const GET_WORRY = gql`
@@ -49,7 +49,7 @@ const StyledLinkButtonBordered = styled(LinkButtonBordered)`
 const WorryDetail: React.FC<WorryInputProps> = ({ id }) => {
   const { data, loading, error } = useQuery(GET_WORRY, {
     variables: {
-      id: Number(id),
+      id,
     },
   })
   if (loading) return <p>ローディング中です</p>

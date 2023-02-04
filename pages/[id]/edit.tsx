@@ -8,7 +8,7 @@ const Edit: NextPage = () => {
   const router = useRouter()
   return (
     <WorryLayout>
-      <WorryForm id={router.query.id} />
+      <WorryForm id={Number(router.query.id)} />
     </WorryLayout>
   )
 }

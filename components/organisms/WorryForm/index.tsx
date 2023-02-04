@@ -33,7 +33,7 @@ const StyledButton = styled(Button)`
 `
 
 export type WorryInputProps = {
-  id?: string | string[]
+  id?: number
 }
 
 const GET_WORRY = gql`

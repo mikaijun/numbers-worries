@@ -25,6 +25,6 @@ export default {
 
 export const Primary: ComponentStoryObj<typeof WorryDetail> = {
   args: {
-    id: "3",
+    id: 3,
   },
 }
