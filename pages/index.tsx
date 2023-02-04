@@ -1,6 +1,8 @@
 import { gql, useQuery } from "@apollo/client"
 import Link from "next/link"
 
+import WorryLayout from "../components/Layouts/WorryLayout"
+
 import type { NextPage } from "next"
 
 const GET_WORRIES = gql`
@@ -21,7 +23,7 @@ const Page: NextPage = () => {
   if (error) return <p>エラーが発生しています</p>
   const { worries } = data
   return (
-    <div>
+    <WorryLayout>
       {worries.map((worry: any, index: number) => (
         <div key={index}>
           <Link href={`/${worry.id}`}>
@@ -33,7 +35,7 @@ const Page: NextPage = () => {
           </Link>
         </div>
       ))}
-    </div>
+    </WorryLayout>
   )
 }
 export default Page

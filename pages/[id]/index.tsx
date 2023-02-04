@@ -3,6 +3,8 @@ import { NextPage } from "next"
 import Link from "next/link"
 import { useRouter } from "next/router"
 
+import WorryLayout from "../../components/Layouts/WorryLayout"
+
 const GET_WORRY = gql`
   query GetWorries($id: ID!) {
     worry(id: $id) {
@@ -26,7 +28,7 @@ const Detail: NextPage = () => {
   if (loading) return <p>ローディング中です</p>
   if (error) return <p>エラーが発生しています</p>
   return (
-    <div>
+    <WorryLayout>
       {data.worry && (
         <div>
           <span>心配内容</span>
@@ -44,7 +46,7 @@ const Detail: NextPage = () => {
 
       <Link href="/">トップへ</Link>
       <Link href={`/${router.query.id}/edit`}>編集へ</Link>
-    </div>
+    </WorryLayout>
   )
 }
 

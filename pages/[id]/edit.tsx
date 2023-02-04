@@ -1,18 +1,15 @@
 import { NextPage } from "next"
-import Link from "next/link"
 import { useRouter } from "next/router"
 
+import WorryLayout from "../../components/Layouts/WorryLayout"
 import WorryInput from "../../components/organisms/WorriesForm"
 
 const Edit: NextPage = () => {
   const router = useRouter()
   return (
-    <div>
-      <p>{router.query.id}</p>
+    <WorryLayout>
       <WorryInput id={router.query.id} />
-      <Link href="/">トップへ</Link>
-      <Link href={`/${router.query.id}/`}>詳細へ</Link>
-    </div>
+    </WorryLayout>
   )
 }
 

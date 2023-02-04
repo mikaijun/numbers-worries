@@ -10,9 +10,19 @@ import BackLink from "../../molecules/BackLink"
 import InputTextField from "../../molecules/InputTextField"
 
 const Wrapper = styled.div`
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
   display: inline-flex;
   gap: 16px;
   flex-direction: column;
+  padding: 16px;
+`
+
+const StyledButtonBorderless = styled(ButtonBorderless)`
+  width: 100%;
+  max-width: 240px;
+  margin: 0 auto;
 `
 
 export type WorryInputProps = {
@@ -133,7 +143,9 @@ const WorriesForm: React.FC<WorryInputProps> = ({ id }) => {
         onChange={handleInputChange}
       />
       <Spacer height={16} />
-      <ButtonBorderless onClick={handleCreateWorry}>送信</ButtonBorderless>
+      <StyledButtonBorderless onClick={handleCreateWorry}>
+        悩みを管理する
+      </StyledButtonBorderless>
     </Wrapper>
   )
 }
