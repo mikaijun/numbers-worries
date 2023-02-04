@@ -5,12 +5,13 @@ import styled from "@emotion/styled"
 
 import { Worry } from "../../../type"
 import ButtonBorderless from "../../atoms/ButtonBorderless"
+import Spacer from "../../atoms/Spacer"
 import BackLink from "../../molecules/BackLink"
 import InputTextField from "../../molecules/InputTextField"
 
 const Wrapper = styled.div`
   display: inline-flex;
-  gap: 8px;
+  gap: 16px;
   flex-direction: column;
 `
 
@@ -99,33 +100,39 @@ const WorriesForm: React.FC<WorryInputProps> = ({ id }) => {
       <InputTextField
         name="worries_content"
         label="悩んでいること"
+        placeholder="貯金がない"
         value={values.worries_content}
         onChange={handleInputChange}
       />
       <InputTextField
         name="minimum_worries"
         label="想定最小被害"
+        placeholder="毎月手取りの10%以上の貯金ができる"
         value={values.minimum_worries}
         onChange={handleInputChange}
       />
       <InputTextField
         name="maximum_worries"
         label="想定最大被害"
+        placeholder="自己破産してしまう"
         value={values.maximum_worries}
         onChange={handleInputChange}
       />
       <InputTextField
         name="real_event_content"
         label="現実に発生した出来事"
+        placeholder="毎月手取りの1%の貯金ができてる"
         value={values.real_event_content}
         onChange={handleInputChange}
       />
       <InputTextField
         name="ratio"
         label="現実に発生した出来事は想定最大被害の何割か？"
+        placeholder="10"
         value={values.ratio}
         onChange={handleInputChange}
       />
+      <Spacer height={16} />
       <ButtonBorderless onClick={handleCreateWorry}>送信</ButtonBorderless>
     </Wrapper>
   )
