@@ -8,11 +8,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 })
 
-export const storyBookClient = new ApolloClient({
-  uri: "http://localhost:3333/api/graphql",
-  cache: new InMemoryCache(),
-})
-
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={client}>

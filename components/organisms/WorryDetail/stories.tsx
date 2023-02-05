@@ -1,7 +1,3 @@
-import { ApolloProvider } from "@apollo/client"
-
-import { storyBookClient } from "../../../pages/_app"
-
 import WorryDetail from "./index"
 
 import type { ComponentMeta, ComponentStoryObj } from "@storybook/react"
@@ -14,17 +10,20 @@ export default {
   },
   decorators: [
     (Story) => {
-      return (
-        <ApolloProvider client={storyBookClient}>
-          <Story />
-        </ApolloProvider>
-      )
+      return <Story />
     },
   ],
 } as ComponentMeta<typeof WorryDetail>
 
 export const Primary: ComponentStoryObj<typeof WorryDetail> = {
   args: {
-    id: 3,
+    worry: {
+      content: "心配事1",
+      damage_rate: 0,
+      id: 1,
+      reality_events: "現実1",
+      suppose_maximum_events: "最大値1",
+      suppose_minimum_events: "最小値1",
+    },
   },
 }
