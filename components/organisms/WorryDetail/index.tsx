@@ -1,25 +1,8 @@
-import { gql, useQuery } from "@apollo/client"
 import styled from "@emotion/styled"
 
 import { colors } from "../../../constants/colors"
+import { WorryQuery } from "../../../constants/types"
 import LinkButtonBordered from "../../molecules/LinkButtonBordered"
-
-export type WorryInputProps = {
-  id: number
-}
-
-const GET_WORRY = gql`
-  query GetWorries($id: ID!) {
-    worry(id: $id) {
-      id
-      content
-      suppose_minimum_events
-      suppose_maximum_events
-      reality_events
-      damage_rate
-    }
-  }
-`
 
 const Wrapper = styled.div`
   width: 100%;
@@ -46,31 +29,24 @@ const StyledLinkButtonBordered = styled(LinkButtonBordered)`
   max-width: 240px;
 `
 
-const WorryDetail: React.FC<WorryInputProps> = ({ id }) => {
-  const { data, loading, error } = useQuery(GET_WORRY, {
-    variables: {
-      id,
-    },
-  })
-  if (loading) return <p>ローディング中です</p>
-  if (error) return <p>エラーが発生しています</p>
+const WorryDetail: React.FC<WorryQuery> = ({ worry }) => {
   return (
     <Wrapper>
-      {data.worry && (
+      {worry && (
         <div>
           <Lead>心配内容</Lead>
-          <Content>{data.worry.content}</Content>
+          <Content>{worry.content}</Content>
           <Lead>心配事に対する想定する最小の出来事</Lead>
-          <Content>{data.worry.suppose_minimum_events}</Content>
+          <Content>{worry.suppose_minimum_events}</Content>
           <Lead>心配事に対する想定する最大の出来事</Lead>
-          <Content>{data.worry.suppose_maximum_events}</Content>
+          <Content>{worry.suppose_maximum_events}</Content>
           <Lead>実際に発生した出来事</Lead>
-          <Content>{data.worry.reality_events}</Content>
+          <Content>{worry.reality_events}</Content>
           <Lead>実際の出来事は想定した最大の何割だったか？</Lead>
-          <Content>{data.worry.damage_rate}</Content>
+          <Content>{worry.damage_rate}</Content>
         </div>
       )}
-      <StyledLinkButtonBordered href={`/${id}/edit`}>
+      <StyledLinkButtonBordered href={`/${worry.id}/edit`}>
         悩みを考え直す
       </StyledLinkButtonBordered>
       <StyledLinkButtonBordered href="/" variant="border">

@@ -1,20 +1,8 @@
-import { gql, useQuery } from "@apollo/client"
 import styled from "@emotion/styled"
 import Link from "next/link"
 
 import { colors } from "../../../constants/colors"
-
-const GET_WORRIES = gql`
-  query GetWorries {
-    worries {
-      id
-      content
-      suppose_minimum_events
-      reality_events
-      damage_rate
-    }
-  }
-`
+import { WorriesQuery } from "../../../constants/types"
 
 const Wrapper = styled.div`
   width: 100%;
@@ -58,11 +46,7 @@ const Rate = styled.p`
   font-weight: bold;
 `
 
-const WorryList: React.FC = () => {
-  const { data, loading, error } = useQuery(GET_WORRIES)
-  if (loading) return <p>ローディング中です</p>
-  if (error) return <p>エラーが発生しています</p>
-  const { worries } = data
+const WorryList: React.FC<WorriesQuery> = ({ worries }) => {
   return (
     <Wrapper>
       <Header>

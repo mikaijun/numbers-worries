@@ -1,10 +1,7 @@
 import type { ForwardRefRenderFunction } from "react"
 import React, { useMemo } from "react"
 
-export type SpacerProps = Omit<
-  React.ComponentPropsWithRef<"div">,
-  "children"
-> & {
+type SpacerProps = Omit<React.ComponentPropsWithRef<"div">, "children"> & {
   width?: number
   height?: number
 }

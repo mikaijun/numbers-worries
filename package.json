@@ -9,7 +9,8 @@
     "lint": "next lint --dir src",
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json}'",
     "storybook": "start-storybook -p 8888 -s ./public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "chromatic": "npx chromatic --project-token=82022efa67b0"
   },
   "dependencies": {
     "@apollo/client": "^3.7.4",
@@ -45,6 +46,9 @@
     "@storybook/react": "^6.5.16",
     "@storybook/testing-library": "^0.0.13",
     "babel-loader": "^8.3.0",
+    "chromatic": "^6.15.0",
     "eslint-config-prettier": "^8.6.0"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "numbers-worries@0.1.0"
 }

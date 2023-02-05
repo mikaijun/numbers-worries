@@ -28,8 +28,6 @@ const SIdeBar = styled.div`
   width: 200px;
 `
 
-export type WorkspaceLayoutProps = {}
-
 const WorryLayout = ({ children }: any) => {
   return (
     <Wrapper>

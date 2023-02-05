@@ -1,9 +1,10 @@
 import React from "react"
 import { useCallback, useEffect, useState } from "react"
 
-import { gql, useMutation, useQuery } from "@apollo/client"
+import { gql, useMutation } from "@apollo/client"
 import styled from "@emotion/styled"
 
+import { WorryQuery } from "../../../constants/types"
 import { Worry } from "../../../type"
 import Button from "../../atoms/Button"
 import Spacer from "../../atoms/Spacer"
@@ -32,22 +33,6 @@ const StyledButton = styled(Button)`
   margin: 0 auto;
 `
 
-export type WorryInputProps = {
-  id?: number
-}
-
-const GET_WORRY = gql`
-  query GetWorries($id: ID!) {
-    worry(id: $id) {
-      id
-      content
-      suppose_minimum_events
-      suppose_maximum_events
-      reality_events
-      damage_rate
-    }
-  }
-`
 export const saveWorryMutation = gql`
   mutation saveWorry($data: SaveWorryInput!) {
     saveWorry(data: $data) {
@@ -61,13 +46,8 @@ export const saveWorryMutation = gql`
     }
   }
 `
-const WorryForm: React.FC<WorryInputProps> = ({ id }) => {
+const WorryForm: React.FC<WorryQuery> = ({ worry }) => {
   const [save] = useMutation(saveWorryMutation)
-  const { data, loading, error } = useQuery(GET_WORRY, {
-    variables: {
-      id: Number(id),
-    },
-  })
   const [values, setValues] = useState<Worry>({
     id: undefined,
     worries_content: "",
@@ -78,20 +58,20 @@ const WorryForm: React.FC<WorryInputProps> = ({ id }) => {
   })
 
   useEffect(() => {
-    if (!data?.worry) return
+    if (!worry) return
     setValues({
       id: undefined,
-      worries_content: data.worry.content,
-      minimum_worries: data.worry.suppose_minimum_events,
-      maximum_worries: data.worry.suppose_maximum_events,
-      real_event_content: data.worry.reality_events,
-      ratio: data.worry.damage_rate,
+      worries_content: worry.content,
+      minimum_worries: worry.suppose_minimum_events,
+      maximum_worries: worry.suppose_maximum_events,
+      real_event_content: worry.reality_events,
+      ratio: worry.damage_rate,
     })
-  }, [data, setValues])
+  }, [worry, setValues])
 
   const handleCreateWorry = useCallback(async () => {
     const data = {
-      id: id,
+      id: worry.id,
       content: values.worries_content,
       suppose_minimum_events: values.minimum_worries,
       suppose_maximum_events: values.maximum_worries,
@@ -101,7 +81,7 @@ const WorryForm: React.FC<WorryInputProps> = ({ id }) => {
     await save({
       variables: { data },
     })
-  }, [save, values])
+  }, [worry, save, values])
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
