@@ -1,17 +1,17 @@
-import InputText from './index';
+import InputText from "./index"
 
-import type { ComponentMeta, ComponentStoryObj } from '@storybook/react';
+import type { ComponentMeta, ComponentStoryObj } from "@storybook/react"
 
 export default {
-  title: 'Atoms/Input/InputText',
+  title: "Atoms/Input/InputText",
   component: InputText,
   argTypes: {
-    onChange: { action: 'onChange' },
+    onChange: { action: "onChange" },
   },
-} as ComponentMeta<typeof InputText>;
+} as ComponentMeta<typeof InputText>
 
 export const Primary: ComponentStoryObj<typeof InputText> = {
   args: {
     disabled: false,
   },
-};
+}

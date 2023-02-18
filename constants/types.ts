@@ -2,7 +2,7 @@ export type WorryQuery = {
   worry: {
     content: string
     damage_rate: number
-    id: number
+    id?: number
     reality_events: string
     suppose_maximum_events: string
     suppose_minimum_events: string
