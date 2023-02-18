@@ -47,7 +47,8 @@
     "@storybook/testing-library": "^0.0.13",
     "babel-loader": "^8.3.0",
     "chromatic": "^6.15.0",
-    "eslint-config-prettier": "^8.6.0"
+    "eslint-config-prettier": "^8.6.0",
+    "storybook-addon-apollo-client": "^4.0.13"
   },
   "readme": "ERROR: No README data found!",
   "_id": "numbers-worries@0.1.0"
