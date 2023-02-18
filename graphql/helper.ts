@@ -17,10 +17,6 @@ export const typeDefs = gql`
   type Worry {
     id: ID
     content: String!
-    suppose_minimum_events: String!
-    suppose_maximum_events: String!
-    reality_events: String!
-    damage_rate: String!
     created_at: String!
     update_at: String!
   }

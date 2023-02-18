@@ -13,13 +13,65 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
+model Event {
+  id                Int    @id @default(autoincrement())
+  content           String @db.VarChar(255)
+  created_at        DateTime
+  update_at         DateTime
+
+  @@map("event")
+}
+
 model Worry {
-  id                     Int    @id @default(autoincrement())
-  content                String @db.VarChar(255)
-  suppose_minimum_events String @db.VarChar(255)
-  suppose_maximum_events String @db.VarChar(255)
-  reality_events         String @db.VarChar(255)
-  damage_rate            Int
-  created_at             DateTime
-  update_at              DateTime
+  id                Int    @id @default(autoincrement())
+  content           String @db.VarChar(255)
+  created_at        DateTime
+  update_at         DateTime
+  worryEventScore   WorryEventScore[]
+
+  @@map("worry")
+}
+
+model Whish {
+  id                Int    @id @default(autoincrement())
+  content           String @db.VarChar(255)
+  created_at        DateTime
+  update_at         DateTime
+  whishEventScore   WhishEventScore[]
+
+  @@map("whish")
+}
+
+model Score {
+  id                Int    @id @default(autoincrement())
+  name              String @db.VarChar(255)
+  created_at        DateTime
+  worryEventScore   WorryEventScore[]
+  whishEventScore   WhishEventScore[]
+
+  @@map("score")
+}
+
+model WorryEventScore {
+  worry             Worry @relation(fields: [worry_id], references: [id])
+  worry_id          Int
+  score             Score @relation(fields: [score_id], references: [id])
+  score_id          Int
+  created_at        DateTime
+  update_at         DateTime
+
+  @@id([worry_id, score_id])
+  @@map("worry_event_score")
+}
+
+model WhishEventScore {
+  whish             Whish @relation(fields: [whish_id], references: [id])
+  whish_id          Int
+  score             Score @relation(fields: [score_id], references: [id])
+  score_id          Int
+  created_at        DateTime
+  update_at         DateTime
+
+  @@id([whish_id, score_id])
+  @@map("whish_event_score")
 }
